@@ -1,0 +1,40 @@
+blueprint:
+  name: Notification Adapter
+  description: >-
+    A script that can be used as adapter for notifications. If you get a new phone, you only have to update it in one place.
+  domain: script
+  input:
+    notify_device:
+      name: Device to notify
+      description: The Device you want to use to receive the notification
+      selector:
+        device:
+          integration: mobile_app
+
+mode: parallel
+
+fields:
+  title:
+    name: Title of the notification
+    required: false
+    default: Home Assistant
+    example: Person Detected
+    description: Title of the notification
+  message:
+    name: Message of the notification
+    required: true
+    example: There is someone in de garden
+    description: Body of the notification
+  data:
+    name: Data
+    required: false
+    description: Optional data
+
+sequence:
+  - alias: "Send notification"
+    domain: mobile_app
+    type: notify
+    device_id: !input notify_device
+    title: "{{ title }}"
+    message: "{{ message }}"
+    data: "{% if data %}{{ data }}{% else %}{}{% endif %}"
