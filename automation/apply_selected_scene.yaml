@@ -1,0 +1,23 @@
+blueprint:
+  name: Activate selected scene
+  description: Activates a scene that is selected in a drop down (version: 0.1.0)
+  domain: automation
+  input:
+    motion_entity:
+      name: Scene select
+      selector:
+        entity:
+          domain: input_select
+
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: state
+    entity_id: !input motion_entity
+    id: scene_change
+
+action:
+  - service: scene.turn_on
+    target:
+      entity_id: "{{ trigger.to_state.state }}"
