@@ -1,6 +1,7 @@
 blueprint:
   name: Activate selected scene
   description: Activates a scene that is selected in a drop down (version: 0.1.0)
+  source_url: https://github.com/Apipa169/home-assistant-blueprints/blob/main/automation/apply_selected_scene.yaml
   domain: automation
   input:
     motion_entity:
