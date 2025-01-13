@@ -38,4 +38,4 @@ sequence:
     device_id: !input notify_device
     title: "{{ title }}"
     message: "{{ message }}"
-    data: "{% if data %}{{ data }}{% else %}{}{% endif %}"
+    data: "{{ data | default('{}') }}"
